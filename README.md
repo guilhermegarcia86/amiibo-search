@@ -1,10 +1,10 @@
-# Superhero Search
+# Amiibo Search
 
-![Booner](./img/img.png)
+![Amiibo](./img/img_1.png)
 
-## What is Superhero Search?
+## What is Amiibo Search?
 
-Superhero Search is an application responsible by to search a superhero and return if it was found.
+Amiibo Search is an application responsible by to search a amiibo and return if it was found.
 
 ## :rocket: Technology
 
