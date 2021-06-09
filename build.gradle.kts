@@ -18,7 +18,7 @@ plugins {
     application
 }
 
-group = "com.hero.search"
+group = "com.amiibo.search"
 version = "1.0-SNAPSHOT"
 
 repositories {

@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:8.0.17
+    cap_add:
+      - SYS_NICE
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_DATABASE: superhero
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql

@@ -1,3 +1,3 @@
 
-rootProject.name = "hero-search"
+rootProject.name = "amiibo-search"
 
