@@ -10,10 +10,11 @@ data class AmiiboResponse(
     val gameSeries: String,
     val head: String,
     val image: String,
-    val name: String
+    val name: String,
+    val type: String
 )
 
 fun toAmiibo(amiiboResponse: AmiiboResponse) = Amiibo(
     amiiboSeries = amiiboResponse.amiiboSeries, name = amiiboResponse.name,
-    gameSeries = amiiboResponse.gameSeries, imageUrl = amiiboResponse.image
+    gameSeries = amiiboResponse.gameSeries, imageUrl = amiiboResponse.image, type = amiiboResponse.type
 )

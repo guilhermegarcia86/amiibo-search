@@ -11,6 +11,7 @@ object AmiiboEntity : Table(name = "Amiibo") {
     val name = varchar("name", 60)
     val gameSeries = varchar("gameSeries", 60)
     val imageUrl = varchar("imageUrl", 255)
+    val type = varchar("type", 20)
 
     override val primaryKey = PrimaryKey(id, name = "ID_AMIIBO_KEY")
 
@@ -18,7 +19,8 @@ object AmiiboEntity : Table(name = "Amiibo") {
         amiiboSeries = resultRow[amiiboSeries],
         name = resultRow[name],
         gameSeries = resultRow[gameSeries],
-        imageUrl = resultRow[imageUrl]
+        imageUrl = resultRow[imageUrl],
+        type = resultRow[type]
     )
 
 }

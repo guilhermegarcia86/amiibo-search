@@ -10,7 +10,7 @@ import io.swagger.v3.oas.models.info.Info
 fun getConfiguredOpenApiPlugin() = OpenApiPlugin(
     OpenApiOptions(
         Info().apply {
-            title("Superhero")
+            title("Amiibo")
             version("1.0.0")
             description("Amiibo Search API documentation")
         }
@@ -23,7 +23,7 @@ fun getConfiguredOpenApiPlugin() = OpenApiPlugin(
     }
 )
 
-const val TAG = "Bonner"
+const val TAG = "Amiibo"
 
 fun healthDocumentation() = document().operation { operation ->
     operation.summary = "Health Check"
@@ -38,4 +38,4 @@ fun searchAmiiboDocumentation() = document().operation { operation ->
     operation.description = "Search for an amiibo by name"
     operation.addTagsItem(TAG)
 }.body<Amiibo>()
-    .json("200", String::class.java)
+    .json("200", Amiibo::class.java)

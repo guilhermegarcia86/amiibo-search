@@ -10,10 +10,16 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 object ExposedSuperheroRepository : Repository {
 
+    private val logger: Logger = LoggerFactory.getLogger(ExposedSuperheroRepository::class.java)
+
     fun createDatabase() {
+
+        logger.info("[INIT DATABASE CREATION]")
 
         transaction {
 
@@ -25,20 +31,35 @@ object ExposedSuperheroRepository : Repository {
     }
 
     override fun findAll(): Set<Amiibo>? {
+
+        logger.info("[FIND ALL AMIIBO ON DATABASE]")
+
         return transaction {
+
+            addLogger(StdOutSqlLogger)
+
             AmiiboEntity.selectAll().map { row ->
                 AmiiboEntity.toAmiibo(row)
             }.toSet()
         }
     }
 
-    override fun findByAmiiboName(amiiboName: String): Amiibo? {
+    override fun findByAmiiboName(amiiboName: String): List<Amiibo>? {
+
+        logger.info("[FIND AMIIBO BY NAME ON DATABASE]")
+
         return transaction {
-            AmiiboEntity.select { AmiiboEntity.name eq amiiboName }.firstOrNull()
-        }?.let { row -> AmiiboEntity.toAmiibo(row) }
+            addLogger(StdOutSqlLogger)
+
+            AmiiboEntity.select { AmiiboEntity.name eq amiiboName }?.map { row ->
+                AmiiboEntity.toAmiibo(row)
+            }.toList()
+        }
     }
 
     override fun insertAmiibo(amiibo: Amiibo): Amiibo? {
+
+        logger.info("[INSERT AMIIBO ON DATABASE]")
 
         transaction {
             addLogger(StdOutSqlLogger)
@@ -46,6 +67,7 @@ object ExposedSuperheroRepository : Repository {
             AmiiboEntity.insert { entity ->
                 entity[name] = amiibo.name
                 entity[amiiboSeries] = amiibo.amiiboSeries
+                entity[type] = amiibo.type
                 entity[gameSeries] = amiibo.gameSeries
                 entity[imageUrl] = amiibo.imageUrl
             }.resultedValues?.firstOrNull() ?: error("No key generated")

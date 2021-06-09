@@ -15,12 +15,12 @@ class SearchAmiibo(private val repository: Repository, private val api: Api) {
 
     fun searchAmiiboByName(amiiboName: String): List<Amiibo>? {
 
-        repository.findByAmiiboName(amiiboName)?.let { amiibo ->
-            logger.info("Retorno repository")
-            return listOf(amiibo)
+        logger.info("INIT SEARCH FOR AN AMIIBO OR IT WILL TRY FETCH ON EXTERNAL SERVICE")
 
+
+        repository.findByAmiiboName(amiiboName)?.takeIf { amiiboList -> !amiiboList.isNullOrEmpty() }?.let { amiiboList ->
+            return amiiboList
         } ?: api.searchAmiiboByName(amiiboName)?.let { amiiboWrapper ->
-            logger.info("Retorno api")
 
             return amiiboWrapper.amiibo.map { amiiboResponse: AmiiboResponse ->
                 val toAmiibo = toAmiibo(amiiboResponse)
