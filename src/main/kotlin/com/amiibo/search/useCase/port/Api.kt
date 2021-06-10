@@ -1,8 +1,8 @@
 package com.amiibo.search.useCase.port
 
-import com.amiibo.search.adapter.api.fuel.dto.response.amiibo.AmiiboWrapper
+import com.amiibo.search.domain.Amiibo
 
 interface Api {
 
-    fun searchAmiiboByName(superheroName: String): AmiiboWrapper?
+    fun searchAmiiboByName(amiiboName: String): List<Amiibo>?
 }

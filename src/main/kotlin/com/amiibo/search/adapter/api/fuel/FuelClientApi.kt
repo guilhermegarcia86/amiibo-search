@@ -1,7 +1,10 @@
 package com.amiibo.search.adapter.api.fuel
 
+import com.amiibo.search.adapter.api.fuel.dto.response.amiibo.AmiiboResponse
 import com.amiibo.search.adapter.api.fuel.dto.response.amiibo.AmiiboWrapper
 import com.amiibo.search.adapter.api.fuel.dto.response.amiibo.ResponseError
+import com.amiibo.search.adapter.api.fuel.dto.response.amiibo.toAmiibo
+import com.amiibo.search.domain.Amiibo
 import com.amiibo.search.useCase.port.Api
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.gson.responseObject
@@ -15,13 +18,13 @@ object FuelClientApi : Api {
 
     private val url: String = System.getenv("URL_API") ?: "https://www.amiiboapi.com/api/amiibo"
 
-    override fun searchAmiiboByName(superheroName: String): AmiiboWrapper? {
+    override fun searchAmiiboByName(amiiboName: String): List<Amiibo>? {
 
-        var amiibo: AmiiboWrapper? = null;
+        var amiibo: List<Amiibo>? = null;
 
         logger.info("TRYING TO FETCH AMIIBO AT THE URL: [$url]")
 
-        Fuel.get(url, listOf("name" to superheroName)).responseObject<AmiiboWrapper> { _, _, result ->
+        Fuel.get(url, listOf("name" to amiiboName)).responseObject<AmiiboWrapper> { _, _, result ->
 
             val (apiResult, fuelError) = result
 
@@ -35,7 +38,9 @@ object FuelClientApi : Api {
                 logger.error("Error to process: ${error.error}")
             }
 
-            amiibo = apiResult
+            amiibo = apiResult?.amiibo?.map { amiiboResponse: AmiiboResponse ->
+                toAmiibo(amiiboResponse)
+            }
 
         }.get()
 
