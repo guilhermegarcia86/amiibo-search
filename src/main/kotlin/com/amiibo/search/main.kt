@@ -1,6 +1,6 @@
 package com.amiibo.search
 
-import com.amiibo.search.adapter.repository.exposed.ExposedSuperheroRepository
+import com.amiibo.search.adapter.repository.exposed.ExposedAmiiboRepository
 import com.amiibo.search.adapter.repository.exposed.config.DatabaseFactory
 import com.amiibo.search.application.http.startHttpServer
 import org.jetbrains.exposed.sql.Database
@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
     val connect = Database.connect(createHikariDataSourceWithRetry)
     connect.useNestedTransactions = true
 
-    ExposedSuperheroRepository.createDatabase()
+    ExposedAmiiboRepository.createDatabase()
 
     startHttpServer()
 }

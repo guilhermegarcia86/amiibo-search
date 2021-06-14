@@ -12,6 +12,7 @@ val valiktor = "0.12.0"
 val slf4j = "1.7.28"
 val fuel = "2.3.1"
 val gson = "2.8.5"
+val mongo = "3.12.8"
 
 plugins {
     kotlin("jvm") version "1.5.10"
@@ -45,6 +46,8 @@ dependencies {
     implementation("com.zaxxer:HikariCP:$hikariCpVersion")
 
     implementation("mysql:mysql-connector-java:$mysql")
+
+    implementation("org.mongodb:mongodb-driver:$mongo")
 
     //Validator
     implementation("org.valiktor:valiktor-core:$valiktor")

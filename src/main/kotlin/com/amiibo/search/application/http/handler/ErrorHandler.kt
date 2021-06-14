@@ -7,7 +7,7 @@ fun errorHandler(app: Javalin){
 
     app.exception(AmiiboNotFoundException::class.java) { _, ctx ->
         ctx.json(object {
-            val message = "Superhero not found"
+            val message = "Amiibo not found"
         }).status(404)
     }
 

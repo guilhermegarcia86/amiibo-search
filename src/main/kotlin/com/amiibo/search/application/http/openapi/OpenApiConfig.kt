@@ -17,9 +17,6 @@ fun getConfiguredOpenApiPlugin() = OpenApiPlugin(
     ).apply {
         path("/swagger-docs")
         swagger(SwaggerOptions("/swagger-ui").title("Amiibo Search Documentation"))
-        defaultDocumentation { doc ->
-            doc.json("500", String::class.java)
-        }
     }
 )
 
@@ -38,4 +35,6 @@ fun searchAmiiboDocumentation() = document().operation { operation ->
     operation.description = "Search for an amiibo by name"
     operation.addTagsItem(TAG)
 }.body<Amiibo>()
-    .json("200", Amiibo::class.java)
+    .json("200", Amiibo::class.java).json("404", object {
+        val message = "Amiibo not found"
+    }::class.java)

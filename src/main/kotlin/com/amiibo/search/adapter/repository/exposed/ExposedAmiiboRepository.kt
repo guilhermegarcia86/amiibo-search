@@ -13,9 +13,9 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-object ExposedSuperheroRepository : Repository {
+object ExposedAmiiboRepository : Repository {
 
-    private val logger: Logger = LoggerFactory.getLogger(ExposedSuperheroRepository::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(ExposedAmiiboRepository::class.java)
 
     fun createDatabase() {
 

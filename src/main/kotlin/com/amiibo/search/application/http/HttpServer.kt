@@ -20,10 +20,10 @@ fun startHttpServer(port: String = "8080") {
         }
         config.enableCorsForAllOrigins()
         config.defaultContentType = "application/json"
-    }.also {
+    }.also { app ->
 
-        mountRoutes(it)
-        errorHandler(it)
+        mountRoutes(app)
+        errorHandler(app)
 
     }.start(httpPort).apply {
         Runtime.getRuntime().addShutdownHook(Thread { this.stop() })
