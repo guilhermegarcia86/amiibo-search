@@ -30,6 +30,12 @@ Kotlin Version: 1.5.10
 ```sh
   $ gradle run
 ```
+  
+### Run tests
+
+```sh
+  $ gradle test
+```
 
 ### Health Check
 
