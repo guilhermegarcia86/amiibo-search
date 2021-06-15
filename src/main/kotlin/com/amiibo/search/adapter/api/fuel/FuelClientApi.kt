@@ -7,6 +7,8 @@ import com.amiibo.search.adapter.api.fuel.dto.response.amiibo.toAmiibo
 import com.amiibo.search.domain.Amiibo
 import com.amiibo.search.useCase.port.Api
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.FuelManager
+import com.github.kittinunf.fuel.core.interceptors.LogRequestAsCurlInterceptor
 import com.github.kittinunf.fuel.gson.responseObject
 import com.google.gson.Gson
 import org.slf4j.Logger
@@ -23,6 +25,8 @@ object FuelClientApi : Api {
         var amiibo: List<Amiibo>? = null;
 
         logger.info("TRYING TO FETCH AMIIBO AT THE URL: [$url]")
+
+        FuelManager.instance.addRequestInterceptor(LogRequestAsCurlInterceptor)
 
         Fuel.get(url, listOf("name" to amiiboName)).responseObject<AmiiboWrapper> { _, _, result ->
 
