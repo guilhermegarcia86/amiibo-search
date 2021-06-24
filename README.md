@@ -6,6 +6,8 @@
 
 Amiibo Search is an application responsible by to search a amiibo and return if it was found.
 
+[Article](https://programadev.com.br/kotlin-javalin-exposed-fuel/)
+
 ## :rocket: Technology
 
 <div align="center">
